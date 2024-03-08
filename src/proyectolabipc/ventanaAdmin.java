@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ventanaAdmin extends JFrame implements ActionListener {
     
@@ -30,22 +36,31 @@ public class ventanaAdmin extends JFrame implements ActionListener {
         tabbedPane.addTab("Productos", pest3);
         
         btnRegistro = new JButton("Crear");
-        btnRegistro.setBounds(800,25,180,50);
+        btnRegistro.setBounds(800,25,100,30);
         btnRegistro.setVisible(true);
         btnRegistro.setEnabled(true);
         btnRegistro.addActionListener(this);
+        btnRegistro.setForeground(Color.WHITE);
+        btnRegistro.setBackground(new Color(0x0094ff));
+        btnRegistro.setBorder(null);
         pest1.add(btnRegistro);
         
         btn_actualizar = new JButton("Actualizar");
-        btn_actualizar.setBounds(1000,25,180,50);
+        btn_actualizar.setBounds(800,70,100,30);
         btn_actualizar.setVisible(true);
         btn_actualizar.addActionListener(this);
+        btn_actualizar.setForeground(Color.WHITE);
+        btn_actualizar.setBackground(new Color(0x0094ff));
+        btn_actualizar.setBorder(null);
         pest1.add(btn_actualizar);
         
         btn_eliminar = new JButton("Eliminar");
-        btn_eliminar.setBounds(900,85,180,50);
+        btn_eliminar.setBounds(800,115,100,30);
         btn_eliminar.setVisible(true);
         btn_eliminar.addActionListener(this);
+        btn_eliminar.setForeground(Color.WHITE);
+        btn_eliminar.setBackground(new Color(0x0094ff));
+        btn_eliminar.setBorder(null);
         pest1.add(btn_eliminar);
         
         String[] columnNames = {"Codigo", "Nombre", "Apellido","Password", "Genero"}; 
@@ -56,48 +71,109 @@ public class ventanaAdmin extends JFrame implements ActionListener {
         scrollPane.setBounds(25, 80, 750, 570);
         pest1.add(scrollPane);
                 
-        JLabel lbl4 = new JLabel("Listado Oficial");
+        JLabel lbl4 = new JLabel("Listado pacientes");
         lbl4.setBounds(25, 25, 750, 50);
-        lbl4.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        lbl4.setBackground(Color.LIGHT_GRAY);
+        lbl4.setBackground(new Color(0x0094ff));
         lbl4.setOpaque(true);
-        lbl4.setVerticalAlignment(SwingConstants.CENTER);
-        lbl4.setFont(new Font(lbl4.getFont().getFontName(), Font.BOLD, 24));
+        lbl4.setForeground(Color.WHITE);
         lbl4.setVisible(true);
-        pest1.add(lbl4);
+        pest1.add(lbl4, BorderLayout.WEST);
+        
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        ArrayList<Doctor> lista_ordenada = ProyectoLabIPC.bubblesortEdadDoctores(); 
+        
+        for(int i = 0; i < Math.min(8,lista_ordenada.size()) ; i++){
+            datos.setValue(lista_ordenada.get(i).getEdad(), "Doctores Hospital", lista_ordenada.get(i).getEspecialidad());
+        }
+       
+        
+        JFreeChart grafico_barras = ChartFactory.createBarChart3D(
+            "Top 8 Doctores más jovenes",
+            "Especialidades",
+            "Edad",
+            datos,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+            
+        );
+        
+        ChartPanel cPanel = new ChartPanel(grafico_barras);
+        cPanel.setMouseWheelEnabled(true);
+        // Asignamos la posición y las dimensiones de nuestro ChartPanel
+        cPanel.setBounds(800, 160, 300, 300);
+        // Agregamos a nuestra pestaña el ChartPanel con nuestro gráfico
+        pest2.add(cPanel);
+        
+        DefaultCategoryDataset datosProd = new DefaultCategoryDataset();
+        ArrayList<Producto> lista_ordenadaPRo = ProyectoLabIPC.bubblesortCantidadProducto(); 
+        
+        for(int i = 0; i < Math.min(8,lista_ordenadaPRo.size()) ; i++){
+            datosProd.setValue(lista_ordenadaPRo.get(i).getCantidad(), "Productos hospital", lista_ordenadaPRo.get(i).getNombre());
+        }
+       
+        
+        JFreeChart grafico_barrasPro = ChartFactory.createBarChart3D(
+            "Top 8 cantidad de producto",
+            "Nombre",
+            "Cantidad",
+            datosProd,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+            
+        );
+        
+        ChartPanel cPanePro = new ChartPanel(grafico_barrasPro);
+        cPanePro.setMouseWheelEnabled(true);
+        // Asignamos la posición y las dimensiones de nuestro ChartPanel
+        cPanePro.setBounds(800, 160, 300, 300);
+        // Agregamos a nuestra pestaña el ChartPanel con nuestro gráfico
+        pest3.add(cPanePro);
         
         //Pestaña 2
         
         btnRegistro2 = new JButton("Crear");
-        btnRegistro2.setBounds(800,25,180,50);
+        btnRegistro2.setBounds(800,25,100,30);
         btnRegistro2.setVisible(true);
         btnRegistro2.setEnabled(true);
         btnRegistro2.addActionListener(this);
+        btnRegistro2.setForeground(Color.WHITE);
+        btnRegistro2.setBackground(new Color(0x0094ff));
+        btnRegistro2.setBorder(null);
         pest2.add(btnRegistro2);
         
+        
         btn_actualizar2 = new JButton("Actualizar");
-        btn_actualizar2.setBounds(1000,25,180,50);
+        btn_actualizar2.setBounds(800,70,100,30);
         btn_actualizar2.setVisible(true);
         btn_actualizar2.addActionListener(this);
+        btn_actualizar2.setForeground(Color.WHITE);
+        btn_actualizar2.setBackground(new Color(0x0094ff));
+        btn_actualizar2.setBorder(null);
         pest2.add(btn_actualizar2);
         
         btn_eliminar2 = new JButton("Eliminar");
-        btn_eliminar2.setBounds(900,85,180,50);
+        btn_eliminar2.setBounds(800,115,100,30);
         btn_eliminar2.setVisible(true);
         btn_eliminar2.addActionListener(this);
+        btn_eliminar2.setForeground(Color.WHITE);
+        btn_eliminar2.setBackground(new Color(0x0094ff));
+        btn_eliminar2.setBorder(null);
         pest2.add(btn_eliminar2);
         
         String[] columnNames2 = {"Codigo", "Nombre", "Apellido", "Genero","Especialidad", "Telefono","Edad"}; 
         
         
         
-        JLabel lbl5 = new JLabel("Listado Oficial");
+        JLabel lbl5 = new JLabel("Listado Doctores");
         lbl5.setBounds(25, 25, 750, 50);
-        lbl5.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        lbl5.setBackground(Color.LIGHT_GRAY);
+        lbl5.setBounds(25, 25, 750, 50);
+        lbl5.setBackground(new Color(0x0094ff));
         lbl5.setOpaque(true);
-        lbl5.setVerticalAlignment(SwingConstants.CENTER);
-        lbl5.setFont(new Font(lbl5.getFont().getFontName(), Font.BOLD, 24));
+        lbl5.setForeground(Color.WHITE);
         lbl5.setVisible(true);
         pest2.add(lbl5);
         
@@ -110,22 +186,31 @@ public class ventanaAdmin extends JFrame implements ActionListener {
         //Penstaña 3
 
         btnRegistro3 = new JButton("Crear");
-        btnRegistro3.setBounds(800,25,180,50);
+        btnRegistro3.setBounds(800,25,100,30);
         btnRegistro3.setVisible(true);
         btnRegistro3.setEnabled(true);
         btnRegistro3.addActionListener(this);
+        btnRegistro3.setForeground(Color.WHITE);
+        btnRegistro3.setBackground(new Color(0x0094ff));
+        btnRegistro3.setBorder(null);
         pest3.add(btnRegistro3);
         
         btn_actualizar3 = new JButton("Actualizar");
-        btn_actualizar3.setBounds(1000,25,180,50);
+        btn_actualizar3.setBounds(800,70,100,30);
         btn_actualizar3.setVisible(true);
         btn_actualizar3.addActionListener(this);
+        btn_actualizar3.setForeground(Color.WHITE);
+        btn_actualizar3.setBackground(new Color(0x0094ff));
+        btn_actualizar3.setBorder(null);
         pest3.add(btn_actualizar3);
         
         btn_eliminar3 = new JButton("Eliminar");
-        btn_eliminar3.setBounds(900,85,180,50);
+        btn_eliminar3.setBounds(800,115,100,30);
         btn_eliminar3.setVisible(true);
         btn_eliminar3.addActionListener(this);
+        btn_eliminar3.setForeground(Color.WHITE);
+        btn_eliminar3.setBackground(new Color(0x0094ff));
+        btn_eliminar3.setBorder(null);
         pest3.add(btn_eliminar3);
         
         String[] columnNames3 = {"Codigo", "Nombre", "cantidad","Descipcion", "Precio"}; 
@@ -138,11 +223,9 @@ public class ventanaAdmin extends JFrame implements ActionListener {
                 
         JLabel lbl6 = new JLabel("Listado Oficial");
         lbl6.setBounds(25, 25, 750, 50);
-        lbl6.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        lbl6.setBackground(Color.LIGHT_GRAY);
+        lbl6.setBackground(new Color(0x0094ff));
         lbl6.setOpaque(true);
-        lbl6.setVerticalAlignment(SwingConstants.CENTER);
-        lbl6.setFont(new Font(lbl6.getFont().getFontName(), Font.BOLD, 24));
+        lbl6.setForeground(Color.WHITE);
         lbl6.setVisible(true);
         pest3.add(lbl6);
         
@@ -152,10 +235,11 @@ public class ventanaAdmin extends JFrame implements ActionListener {
        
 
         getContentPane().add(tabbedPane);
-        this.setBounds(650,400,1200,600);
+        this.setSize(1200,600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.setVisible(true);
+        this.setBackground(Color.WHITE);
         
         
         

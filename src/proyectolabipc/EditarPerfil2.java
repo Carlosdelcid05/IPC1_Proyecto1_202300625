@@ -5,9 +5,10 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static proyectolabipc.ProyectoLabIPC.listaDoctores;
 
 
-public class RegistroDoctor extends JFrame implements ActionListener {
+public class EditarPerfil2 extends JFrame implements ActionListener {
         
     private JTextField firstNameField;
     private JTextField lastNameField;
@@ -19,14 +20,14 @@ public class RegistroDoctor extends JFrame implements ActionListener {
 
     private JButton registerButton;
     
-    public RegistroDoctor() {
+    public EditarPerfil2() {
          initComponents();
     }
     
     private void initComponents() {
-        JLabel titleLabel = new JLabel("Crear Doctor");
+        JLabel titleLabel = new JLabel("Actualizar Doctor");
         titleLabel.setFont(new Font("Kristen ITC", Font.BOLD, 20));
-        titleLabel.setBounds(200, 10, 100, 30);
+        titleLabel.setBounds(200, 10, 200, 30);
         this.add(titleLabel);
 
         JLabel firstNameLabel = new JLabel("Nombre:");
@@ -87,16 +88,26 @@ public class RegistroDoctor extends JFrame implements ActionListener {
        telefonoField.setBounds(630, 90, 260, 25);
         this.add(telefonoField);
         
+        JLabel codigoLabel = new JLabel("codigo");
+        codigoLabel.setBounds(520, 130, 80, 25);
+        this.add(codigoLabel);
+        
+        JLabel codigo = new JLabel(String.valueOf(ProyectoLabIPC.codigoSesion));
+        codigo.setBounds(620, 130, 80, 25);
+        this.add(codigo);
+
+       
+        
         
 
-        registerButton = new JButton("Registrarse");
+        registerButton = new JButton("Actualizar");
         registerButton.setBounds(480, 240, 150, 25);
         registerButton.setForeground(Color.WHITE);
         registerButton.setBackground(new Color(0x0094ff));
         registerButton.addActionListener(this);
         this.add(registerButton);
 
-        this.setTitle("Registro");
+        this.setTitle("Actualizar");
         this.setBounds(650, 400, 1000, 350);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,7 +123,8 @@ public class RegistroDoctor extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Registrarse")) {
+        if (e.getActionCommand().equals("Actualizar")) {
+            
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
             String pass = passField.getText();
@@ -120,15 +132,22 @@ public class RegistroDoctor extends JFrame implements ActionListener {
             String telefono = especialidadField.getText();
             int edad = Integer.parseInt(edadField.getText());
             String selectedGender = (String) genderComboBox.getSelectedItem();
-            
-            String[] hora = {};
-            
-            ProyectoLabIPC.Agregar_doctor(ProyectoLabIPC.codigo, firstName, lastName, selectedGender,especialidad, telefono, edad,pass, hora);
-            
-            ProyectoLabIPC.codigo++;
+            String[] hora = {""};
+
+            for(int i = 0; i < ProyectoLabIPC.listaDoctores.size() ; i++){
+                
+                if (ProyectoLabIPC.listaDoctores.get(i).getCodigo()  == ProyectoLabIPC.codigoSesion){
+                    ProyectoLabIPC.listaDoctores.remove(i);
+                     Doctor new_date = new Doctor(ProyectoLabIPC.codigoSesion, firstName, lastName, especialidad, telefono, selectedGender, edad, pass, hora);
+        listaDoctores.add(new_date);
+                    
+                    
+                }
+            }
+    
             this.dispose();
             
-            ventanaAdmin vtn_admin= new ventanaAdmin();
+            ventanaDoctor vtn_admin= new ventanaDoctor();
         }
         
         

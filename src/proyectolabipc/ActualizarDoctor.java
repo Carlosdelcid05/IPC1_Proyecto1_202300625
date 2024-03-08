@@ -25,7 +25,7 @@ public class ActualizarDoctor extends JFrame implements ActionListener {
     }
     
     private void initComponents() {
-        JLabel titleLabel = new JLabel("Crear Doctor");
+        JLabel titleLabel = new JLabel("Actualizar Doctor");
         titleLabel.setFont(new Font("Kristen ITC", Font.BOLD, 20));
         titleLabel.setBounds(200, 10, 100, 30);
         this.add(titleLabel);
@@ -132,12 +132,13 @@ public class ActualizarDoctor extends JFrame implements ActionListener {
             String telefono = especialidadField.getText();
             int edad = Integer.parseInt(edadField.getText());
             String selectedGender = (String) genderComboBox.getSelectedItem();
+            String[] hora = {""};
 
             for(int i = 0; i < ProyectoLabIPC.listaDoctores.size() ; i++){
                 
                 if (ProyectoLabIPC.listaDoctores.get(i).getCodigo()  == ProyectoLabIPC.idInput){
                     ProyectoLabIPC.listaDoctores.remove(i);
-                     Doctor new_date = new Doctor(ProyectoLabIPC.idInput, firstName, lastName, especialidad, telefono, selectedGender, edad, pass);
+                     Doctor new_date = new Doctor(ProyectoLabIPC.idInput, firstName, lastName, especialidad, telefono, selectedGender, edad, pass, hora);
         listaDoctores.add(new_date);
                     
                     

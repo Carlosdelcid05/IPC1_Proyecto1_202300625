@@ -21,7 +21,7 @@ public final class InicioSesion extends JFrame implements ActionListener {
 
     public void initComponents() {
         JPanel panel = new JPanel();
-        panel.setLayout(null); // Usando layout absoluto
+        panel.setLayout(null); 
         panel.setBackground(Color.WHITE);
         this.add(panel);
 
@@ -118,7 +118,7 @@ public final class InicioSesion extends JFrame implements ActionListener {
             
             ingresoPaciente(username, pwd);
             ingresoDoctor(username, pwd);
-            
+            ProyectoLabIPC.codigoSesion = Integer.parseInt(username);
             System.out.println("Usuario: " + username);
             System.out.println("Contraseña: " + pwd);
 
@@ -127,9 +127,8 @@ public final class InicioSesion extends JFrame implements ActionListener {
                 this.dispose();
                 } else if (ingresoPaciente(username, pwd)) {
                    System.out.println("Ha ingresado un Paciente");
-                    ProyectoLabIPC.codigoSesion = Integer.parseInt(username);
-                    ProyectoLabIPC.passwordSesion = pwd;
-                    System.out.println(ProyectoLabIPC.passwordSesion);
+                    
+    
 
                     ventanaPaciente vtnPaciente = new ventanaPaciente();
                    
@@ -137,6 +136,8 @@ public final class InicioSesion extends JFrame implements ActionListener {
                    
                 } else if (ingresoDoctor(username, pwd)) {
                     System.out.println("Ha ingresado un Doctor");
+                    ventanaDoctor vtnDoctor = new ventanaDoctor();
+                    this.dispose();
                 } else {
                 JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrectos.", "Error en el inicio de sesión",   JOptionPane.ERROR_MESSAGE);
                 }

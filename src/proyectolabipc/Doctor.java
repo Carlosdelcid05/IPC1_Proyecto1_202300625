@@ -8,9 +8,10 @@ public class Doctor {
     private String genero;
     private String especialidad;
     private String telefono;
+    private String[] hora;
     private int edad;
 
-    public Doctor(int codigo, String nombre, String apellido, String genero,String especialidad, String telefono, int edad, String password) {
+    public Doctor(int codigo, String nombre, String apellido, String genero,String especialidad, String telefono, int edad, String password, String[] hora) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -19,6 +20,7 @@ public class Doctor {
         this.telefono = telefono; 
         this.edad = edad; 
         this.password = password;
+        this.hora = hora;
     }
 
 
@@ -95,6 +97,14 @@ public class Doctor {
     
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String[] getHora() {
+        return hora;
+    }
+
+    public void setHora(String[] hora) {
+        this.hora = hora;
     }
     
     

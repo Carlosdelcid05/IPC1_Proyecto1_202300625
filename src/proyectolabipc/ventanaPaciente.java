@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class ventanaPaciente extends JFrame implements ActionListener {
     
     JButton btnGenerarCita, btn_MostrarDoctor, btn_MostrarHorario, btnEditarPerfil;
-    JTable table_SocilicitarCita;
     JTextField motivoField;
     JPanel pest1;
     JComboBox<String> especialidadComboBox;
@@ -17,27 +16,33 @@ public class ventanaPaciente extends JFrame implements ActionListener {
     JComboBox<String> fechaComboBox;
     JComboBox<String> horaComboBox;
     String[] doctor = new String[ProyectoLabIPC.listaDoctores.size()];
+    String[] horario = new String[ProyectoLabIPC.listaHorarioCitas.size()];
     ArrayList<String> doctores = new ArrayList<>();
+    ArrayList<String> horarios = new ArrayList<>();
     ArrayList<String> especialidadesUnicas = new ArrayList<>();
     ArrayList<String> fechas = new ArrayList<>();
     ArrayList<String> horas = new ArrayList<>();
+    int[] codigoDoctor = new int[ProyectoLabIPC.listaDoctores.size()];
     
     
     JTable table_Doctor;
     
-   
-    JTable table_producto;
     
     private void evaluar(){
         doctores.clear();
         pest1.remove(doctorComboBox);
         for (int i = 0; i < ProyectoLabIPC.listaDoctores.size(); i++) {
         String doctorEnLista = ProyectoLabIPC.listaDoctores.get(i).getNombre();
-
+        
+        
+        
+        
         if (ProyectoLabIPC.listaDoctores.get(i).getEspecialidad().equals((String) especialidadComboBox.getSelectedItem())) {
             if (!doctores.contains(doctorEnLista)) {
                 doctores.add(doctorEnLista);
                 doctor = doctores.toArray(new String[0]);
+                codigoDoctor[i] = ProyectoLabIPC.listaDoctores.get(i).getCodigo();
+                
             }
         }
     }       
@@ -45,6 +50,26 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         doctorComboBox.setBounds(130, 190, 175, 25);
         pest1.add(doctorComboBox);
     }
+    
+    private void evaluar2(){
+        horarios.clear();
+        pest1.remove(horaComboBox);
+        for (int i = 0; i < ProyectoLabIPC.listaHorarioCitas.size(); i++) {
+        String horarioEnLista = ProyectoLabIPC.listaHorarioCitas.get(i).getHora();
+
+        if (ProyectoLabIPC.listaDoctores.get(i).getNombre().equals((String) horaComboBox.getSelectedItem()) && (codigoDoctor[i] == ProyectoLabIPC.listaDoctores.get(i).getCodigo())) {
+            if (!horarios.contains(horarioEnLista)) {
+                horarios.add(horarioEnLista);
+                horario = horarios.toArray(new String[0]);
+            }
+        }
+    }       
+        horaComboBox = new JComboBox<>(horario);
+        horaComboBox.setBounds(130, 190, 175, 25);
+        pest1.add(horaComboBox);
+    }
+    
+    
     
     public ventanaPaciente() {
     
@@ -96,6 +121,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         pest1.add(doctorComboBox);
         evaluar();
         
+        
         btnGenerarCita = new JButton("Generar cita");
         btnGenerarCita.setBounds(500,300,180,50);
         btnGenerarCita.setVisible(true);
@@ -126,10 +152,6 @@ public class ventanaPaciente extends JFrame implements ActionListener {
          JLabel horarioLabel = new JLabel("Horarios");
         horarioLabel.setBounds(140, 230, 80, 20);
         pest1.add(horarioLabel);
-                
-         //JLabel FechaLabel = new JLabel("Fecha");
-       // especialidadLabel.setBounds(70, 150, 80, 25);
-       // pest1.add(especialidadLabel);
 
         for(int i = 0; i < ProyectoLabIPC.listaCitas.size(); i++) {
         String horario = ProyectoLabIPC.listaCitas.get(i).getFecha();
@@ -143,9 +165,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         fechaComboBox.setBounds(150, 260, 175, 25);
         pest1.add(fechaComboBox);
         
-       // JLabel HoraLabel = new JLabel("Hora");
-       // especialidadLabel.setBounds(70, 150, 80, 25);
-       //pest1.add(especialidadLabel);
+
 
         for(int i = 0; i < ProyectoLabIPC.listaCitas.size(); i++) {
         String horario2 = ProyectoLabIPC.listaCitas.get(i).getHora();
@@ -154,17 +174,16 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         horas.add(horario2);
         }
         }
-        //String[] horario2 = horas.toArray(new String[0]);
-        String[] horario2 = {"9:00","13:00","14:00","16:00"};
+        String[] horario2 = {"00:00"};
         horaComboBox = new JComboBox<>(horario2);
         horaComboBox.setBounds(390, 260, 175, 25);
         pest1.add(horaComboBox);
-        
+
         
         
         //Pestaña 2
       
-        String[] columnNames2 = {"Codigo", "Nombre", "Apellido", "Genero","Especialidad", "Telefono","Edad"}; 
+        String[] columnNames2 = {"No", "Estado", "Fecha", "Hora"}; 
         
         
         
@@ -176,7 +195,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         lbl5.setVisible(true);
         pest2.add(lbl5);
         
-        table_Doctor = new JTable(ProyectoLabIPC.convertirDatosDoctores_tabla(),columnNames2);
+        table_Doctor = new JTable(ProyectoLabIPC.convertirDatosCitas_tabla(),columnNames2);
         
         JScrollPane scrollPanes2 = new JScrollPane(table_Doctor);
         scrollPanes2.setBounds(25, 80, 500, 250);
@@ -185,27 +204,43 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         //Penstaña 3
 
        
-        String[] columnNames3 = {"Codigo", "Nombre", "cantidad","Descipcion", "Precio"}; 
-        
-        table_producto = new JTable(ProyectoLabIPC.convertirDatosProductos_tabla(),columnNames3);
-        
-        JScrollPane scrollPane3 = new JScrollPane(table_producto);
-        scrollPane3.setBounds(25, 80, 750, 570);
-        pest3.add(scrollPane3);
-                
-        JLabel lbl6 = new JLabel("Listado Oficial");
-        lbl6.setBounds(25, 25, 750, 50);
-        lbl6.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        lbl6.setBackground(Color.LIGHT_GRAY);
-        lbl6.setOpaque(true);
-        lbl6.setVerticalAlignment(SwingConstants.CENTER);
-        lbl6.setFont(new Font(lbl6.getFont().getFontName(), Font.BOLD, 24));
-        lbl6.setVisible(true);
-        pest3.add(lbl6);
-        
-        
-       
-        
+ JPanel panelPrincipal = new JPanel(new GridLayout(0, 2));
+        panelPrincipal.setBounds(25, 80, 650, 300);
+
+        for (int i = 0; i < ProyectoLabIPC.listaProductos.size(); i++) {
+            JPanel panelProducto = new JPanel(new GridBagLayout());
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 5, 5, 5);
+
+            JLabel labelNombre = new JLabel("Nombre: " + ProyectoLabIPC.listaProductos.get(i).getNombre());
+            JLabel labelDescripcion = new JLabel("Descripción: " + ProyectoLabIPC.listaProductos.get(i).getDescripcion());
+            JLabel labelPrecio = new JLabel("Precio: " + ProyectoLabIPC.listaProductos.get(i).getPrecio());
+
+            Font font = new Font("MV Boli", Font.PLAIN, 12);
+            Color colorTexto = Color.decode("#2e90e8");
+            labelNombre.setFont(font);
+            labelDescripcion.setFont(font);
+            labelPrecio.setFont(font);
+            labelNombre.setForeground(colorTexto);
+            labelDescripcion.setForeground(colorTexto);
+            labelPrecio.setForeground(colorTexto);
+
+            panelProducto.add(labelNombre, gbc);
+            gbc.gridy = 1;
+            panelProducto.add(labelDescripcion, gbc);
+            gbc.gridy = 2;
+            panelProducto.add(labelPrecio, gbc);
+
+            panelPrincipal.add(panelProducto);
+        }
+
+        JScrollPane ScrollPane = new JScrollPane(panelPrincipal);
+        ScrollPane.setBounds(25, 80, 600, 300);
+        pest3.add(ScrollPane);
+
+
        
 
         getContentPane().add(tabbedPane);
@@ -223,6 +258,21 @@ public class ventanaPaciente extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
     
         if (e.getSource() == btnGenerarCita) {
+            String motivo = motivoField.getText();
+            String fecha = (String) fechaComboBox.getSelectedItem();
+            String hora = (String) horaComboBox.getSelectedItem();
+            String paciente = "";
+            
+            for(int i = 0; i < ProyectoLabIPC.listaPacientes.size(); i++){
+                if(ProyectoLabIPC.listaPacientes.get(i).getCodigo() == ProyectoLabIPC.codigoSesion){
+                  paciente = ProyectoLabIPC.listaPacientes.get(i).getNombre();
+                }
+                
+            }
+            
+            ProyectoLabIPC.Agregar_cita(motivo, 0, fecha, hora, paciente, motivo, ProyectoLabIPC.codigoSesion);
+            
+            
   
         }
         
@@ -234,7 +284,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         }
         
         if(e.getSource() == btn_MostrarHorario){
-            
+            evaluar2();
         }
         
         if (e.getSource() == btnEditarPerfil){

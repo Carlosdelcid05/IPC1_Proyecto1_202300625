@@ -12,31 +12,35 @@ public class Cita {
 
   
     
-    private int no;
+    //private int no;
     private String motivo;
-    private int doctorCodigo;
+    private int doctor;
     private String fecha;
     private String hora;
     private String pacienteNombre;
+    private String estado;
+    private int paciente;
     
-    public Cita(int no, String motivo, int doctorCodigo, String fecha, String hora, String pacienteNombre){
+    public Cita(/*int no,*/ String motivo, int doctor, String fecha, String hora, String pacienteNombre, String estado, int paciente){
     
-        this.no = no;
+        //this.no = no;
         this.motivo = motivo;
-        this.doctorCodigo = doctorCodigo;
+        this.doctor = doctor;
         this.fecha = fecha;
         this.hora = hora;
         this.pacienteNombre = pacienteNombre;
+        this.paciente = paciente;
+        this.estado = estado;
     
     }
 
-    public int getNo() {
+   /* public int getNo() {
         return no;
     }
 
     public void setNo(int no) {
         this.no = no;
-    }
+    }*/
 
     public String getMotivo() {
         return motivo;
@@ -46,12 +50,12 @@ public class Cita {
         this.motivo = motivo;
     }
 
-    public int getDoctorCodigo() {
-        return doctorCodigo;
+    public int getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorCodigo(int doctorCodigo) {
-        this.doctorCodigo = doctorCodigo;
+    public void setDoctor(int doctor) {
+        this.doctor = doctor;
     }
 
     public String getFecha() {
@@ -76,6 +80,22 @@ public class Cita {
 
     public void setPacienteNombre(String pacienteNombre) {
         this.pacienteNombre = pacienteNombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public int getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(int paciente) {
+        this.paciente = paciente;
     }
    
     
