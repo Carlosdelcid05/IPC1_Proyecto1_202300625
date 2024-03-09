@@ -75,7 +75,7 @@ public class ventanaDoctor extends JFrame implements ActionListener {
                 btnDetalles.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                   JOptionPane.showMessageDialog(getContentPane(), ProyectoLabIPC.listaCitas.get(indice).getMotivo(), "Más informacion",   JOptionPane.ERROR_MESSAGE);
+                   JOptionPane.showMessageDialog(getContentPane(), ProyectoLabIPC.listaCitas.get(indice).getMotivo(), "Más informacion",   JOptionPane.INFORMATION_MESSAGE);
                     }
                 });
             

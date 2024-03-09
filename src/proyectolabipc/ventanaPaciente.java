@@ -57,19 +57,21 @@ public class ventanaPaciente extends JFrame implements ActionListener {
         for (int i = 0; i < ProyectoLabIPC.listaHorarioCitas.size(); i++) {
         String horarioEnLista = ProyectoLabIPC.listaHorarioCitas.get(i).getHora();
 
-        if (ProyectoLabIPC.listaDoctores.get(i).getNombre().equals((String) horaComboBox.getSelectedItem()) && (codigoDoctor[i] == ProyectoLabIPC.listaDoctores.get(i).getCodigo())) {
+        if ((codigoDoctor[i] == ProyectoLabIPC.listaDoctores.get(i).getCodigo()) /*|| ProyectoLabIPC.lis*/) {
             if (!horarios.contains(horarioEnLista)) {
                 horarios.add(horarioEnLista);
                 horario = horarios.toArray(new String[0]);
             }
         }
-    }       
+    
+        }  
+        if(horario.length > 0){
         horaComboBox = new JComboBox<>(horario);
         horaComboBox.setBounds(130, 190, 175, 25);
         pest1.add(horaComboBox);
+    } else { JOptionPane.showMessageDialog(this, "Error", "El doctor no cuenta con horarios disponibles actualmete",   JOptionPane.ERROR_MESSAGE);}
     }
-    
-    
+
     
     public ventanaPaciente() {
     
@@ -271,6 +273,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
             }
             
             ProyectoLabIPC.Agregar_cita(motivo, 0, fecha, hora, paciente, motivo, ProyectoLabIPC.codigoSesion);
+            JOptionPane.showMessageDialog(this, "Cita ingresada", "La cita ha sido agragada exitosamente",   JOptionPane.INFORMATION_MESSAGE);
             
             
   

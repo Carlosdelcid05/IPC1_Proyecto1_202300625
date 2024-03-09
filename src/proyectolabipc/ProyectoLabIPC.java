@@ -51,10 +51,7 @@ public class ProyectoLabIPC {
         listaDoctores.add(new Doctor(202300007, "Luisa", "Gómez", "Femenino", "Dermatóloga", "555-5678", 45, "789", hora));
         listaDoctores.add(new Doctor(202300008, "Andrés", "Martínez", "Masculino", "Psiquiatra", "555-9101", 60, "101", hora));
 
-        listaProductos.add(new Producto(1, "Cataflan", 4, "Medicamento para el dolor", "Q.500.00"));
-        listaProductos.add(new Producto(1, "Cataflan", 4, "Medicamento para el dolor", "Q.500.00"));
-        listaProductos.add(new Producto(1, "Cataflan", 4, "Medicamento para el dolor", "Q.500.00"));
-        listaProductos.add(new Producto(1, "Cataflan", 4, "Medicamento para el dolor", "Q.500.00"));
+     
        
         listaCitas.add(new Cita("Me siento enfermo jajaja",202300002 ,"22/03/2024", "00:00", "Pancho", "Pediente",202300001));
         listaCitas.add(new Cita("Me duele la cabeza Dxdx",202300002,"13/05/2024", "01:00", "Pancho", "Pendiente",202300001));      
@@ -74,7 +71,7 @@ public class ProyectoLabIPC {
         listaProductos.add(new Producto(7, "Salbutamol", 4, "Broncodilatador", "Q.55.00"));
         listaProductos.add(new Producto(8, "Hidroclorotiazida", 10, "Diurético", "Q.65.00"));
         listaProductos.add(new Producto(9, "Simvastatina", 12, "Hipolipemiante", "Q.75.00"));
-        
+           listaProductos.add(new Producto(1, "Cataflan", 4, "Medicamento para el dolor", "Q.500.00"));
     }
 
     
