@@ -174,10 +174,13 @@ public class ventanaDoctor extends JFrame implements ActionListener {
         pest2.add(scrollPane);
         
         btnEditarPerfil = new JButton("Editar perfil");
-        btnEditarPerfil.setBounds(550,20,180,50);
+        btnEditarPerfil.setBounds(550,20,100,30);
         btnEditarPerfil.setVisible(true);
         btnEditarPerfil.setEnabled(true);
         btnEditarPerfil.addActionListener(this);
+        btnEditarPerfil.setBackground(new Color(0x0094ff));
+        btnEditarPerfil.setForeground(Color.WHITE);
+        btnEditarPerfil.setBorder(null);
         this.add(btnEditarPerfil);
         
         this.add(tabbedPane);
@@ -205,7 +208,8 @@ public class ventanaDoctor extends JFrame implements ActionListener {
             }
             ProyectoLabIPC.Agregar_horarios(ProyectoLabIPC.Numero, Horario,doctor);
             ProyectoLabIPC.Numero++;            
-            this.repaint();
+            this.dispose();
+            ventanaDoctor vtnDoc = new ventanaDoctor();
             
             
          

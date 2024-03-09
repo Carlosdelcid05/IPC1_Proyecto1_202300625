@@ -41,7 +41,7 @@ public class ventanaPaciente extends JFrame implements ActionListener {
             if (!doctores.contains(doctorEnLista)) {
                 doctores.add(doctorEnLista);
                 doctor = doctores.toArray(new String[0]);
-                codigoDoctor[i] = ProyectoLabIPC.listaDoctores.get(i).getCodigo();
+                codigoDoctor[i] = ProyectoLabIPC.listaHorarioCitas.get(i).getDoctor();
                 
             }
         }
@@ -235,6 +235,8 @@ public class ventanaPaciente extends JFrame implements ActionListener {
             gbc.gridy = 2;
             panelProducto.add(labelPrecio, gbc);
 
+            panelProducto.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+            
             panelPrincipal.add(panelProducto);
         }
 

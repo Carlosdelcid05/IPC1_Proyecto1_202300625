@@ -58,7 +58,10 @@ public class ProyectoLabIPC {
         listaCitas.add(new Cita("Me siento enfermo jajaja",202300002 ,"51/05/2024", "01:00", "Pancho", "Pendiente",202300001));  
         listaCitas.add(new Cita("Me siento enfermo jajaja",202300002 ,"65/05/2024", "01:00", "Pancho", "Pendiente",202300001));  
         
-        listaHorarioCitas.add(new Horario(1,"00:00)",202300002));
+        listaHorarioCitas.add(new Horario(1,"00:10",202300002));
+        listaHorarioCitas.add(new Horario(1,"00:20",202300002));
+        listaHorarioCitas.add(new Horario(1,"00:30",202300002));
+        listaHorarioCitas.add(new Horario(1,"00:40",202300002));
         listaHorarioCitas.add(new Horario(1,"00:00",202300003));
         listaHorarioCitas.add(new Horario(1,"00:00",202300004));
         listaHorarioCitas.add(new Horario(1,"00:00",202300005));
@@ -262,13 +265,13 @@ public static void Agregar_horarios(int Numero, String Hora, int doctor){
 
         
         for (int i = 0; i < filas; i++) {
-            if(codigoSesion == listaHorarioCitas.get(i).getDoctor()){}
+            if(codigoSesion == listaHorarioCitas.get(i).getDoctor()){
             Horario asigna = listaHorarioCitas.get(i);
             arreglo[i][0] = i+1;
             arreglo[i][1] = asigna.getHora();
 
            
-        }
+        }}
     
         return arreglo;
     }
